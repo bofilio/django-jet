@@ -1,0 +1,142 @@
+/* extend existing classes */
+.dashboard-item-content {}
+
+.dashboard-item {
+    margin-bottom: 0px !important;
+}
+
+/* adding aditional classes */
+.bg-purple-200 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(233 213 255 / var(--tw-bg-opacity));
+}
+
+a:focus, a:visited {
+    color: black;
+}
+
+a:hover {
+    color: #79A7D8;
+}
+
+.box-border {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+.gap-y-4 {
+    row-gap: 1rem
+        /* 16px */
+    ;
+}
+
+.gap-4 {
+    gap: 1rem
+        /* 16px */
+    ;
+}
+
+.p-4 {
+    padding: 1rem;
+}
+
+.p-2 {
+    padding: 0.5rem;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.gap-4 {
+    gap: 1rem
+        /* 16px */
+    ;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.flex-shrink-0 {
+    flex-shrink: 0;
+}
+
+.flex-grow {
+    flex-grow: 1;
+}
+
+.basis-1\/12 {
+    flex-basis: 8.333333%;
+}
+
+.basis-2\/12 {
+    flex-basis: 16.666667%;
+}
+
+.basis-3\/12 {
+    flex-basis: 25%;
+}
+
+.basis-4\/12 {
+    flex-basis: 33.333333%;
+}
+
+.basis-5\/12 {
+    flex-basis: 41.666667%;
+}
+
+.basis-6\/12 {
+    flex-basis: 50%;
+}
+
+.basis-7\/12 {
+    flex-basis: 58.333333%;
+}
+
+.basis-8\/12 {
+    flex-basis: 66.666667%;
+}
+
+.basis-9\/12 {
+    flex-basis: 75%;
+}
+
+.basis-10\/12 {
+    flex-basis: 83.333333%;
+}
+
+.basis-11\/12 {
+    flex-basis: 91.666667%;
+}
+
+.basis-full {
+    flex-basis: 100%;
+}
+
+.text-black {
+    color: black;
+}
+
+.font-bold {
+    font-weight: 700;
+}
+
+.font-semibold {
+    font-weight: 600;
+}

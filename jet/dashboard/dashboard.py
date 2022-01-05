@@ -23,7 +23,7 @@ class Dashboard(object):
     """
 
     #: Number of columns in which widgets can be placed
-    columns = 2
+    columns = 1
 
     #: Dashboard Modules (widgets) that dashboard is filled with, when the user open it for the first time
     #:
@@ -116,6 +116,7 @@ class Dashboard(object):
         for module in self.children:
             column = module.column if module.column is not None else i % self.columns
             order = module.order if module.order is not None else int(i / self.columns)
+            grid= module.grid if module.grid is not None else (self.grid)
 
             module_models.append(UserDashboardModule.objects.create(
                 title=module.title,
@@ -123,6 +124,7 @@ class Dashboard(object):
                 user=user.pk,
                 module=module.fullname(),
                 column=column,
+                grid= grid,
                 order=order,
                 settings=module.dump_settings(),
                 children=module.dump_children()
@@ -139,13 +141,14 @@ class Dashboard(object):
 
         if len(module_models) == 0:
             module_models = self.create_initial_module_models(self.context['request'].user)
-
         loaded_modules = []
 
         for module_model in module_models:
+            #print(module_model.grid)
             module_cls = module_model.load_module()
+            #print(module_cls)
             if module_cls is not None:
-                module = module_cls(model=module_model, context=self.context)
+                module = module_cls(model=module_model, context=self.context,grid=module_model.grid)
                 loaded_modules.append(module)
 
         self.modules = loaded_modules
@@ -203,7 +206,7 @@ class AppIndexDashboard(Dashboard):
 
 
 class DefaultIndexDashboard(Dashboard):
-    columns = 3
+    columns = 1
 
     def init_with_context(self, context):
         self.available_children.append(modules.LinkList)
@@ -223,7 +226,7 @@ class DefaultIndexDashboard(Dashboard):
                  reverse('%s:password_change' % site_name)],
                 [_('Log out'), reverse('%s:logout' % site_name)],
             ],
-            column=0,
+            grid='s12 m6 l4',
             order=0
         ))
 
@@ -231,7 +234,7 @@ class DefaultIndexDashboard(Dashboard):
         self.children.append(modules.AppList(
             _('Applications'),
             exclude=('auth.*',),
-            column=1,
+            grid='s12 m6 l4',
             order=0
         ))
 
@@ -239,7 +242,7 @@ class DefaultIndexDashboard(Dashboard):
         self.children.append(modules.AppList(
             _('Administration'),
             models=('auth.*',),
-            column=2,
+            grid='s12 m6 l4',
             order=0
         ))
 
@@ -247,7 +250,7 @@ class DefaultIndexDashboard(Dashboard):
         self.children.append(modules.RecentActions(
             _('Recent Actions'),
             10,
-            column=0,
+            grid='s12 m6 l4',
             order=1
         ))
 
@@ -256,7 +259,7 @@ class DefaultIndexDashboard(Dashboard):
             _('Latest Django News'),
             feed_url='http://www.djangoproject.com/rss/weblog/',
             limit=5,
-            column=1,
+            grid='s12 m6 l4',
             order=1
         ))
 
@@ -280,7 +283,7 @@ class DefaultIndexDashboard(Dashboard):
                     'external': True,
                 },
             ],
-            column=2,
+            grid='s12 m6 l4',
             order=1
         ))
 

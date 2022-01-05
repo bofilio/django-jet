@@ -76,11 +76,19 @@ def get_app_list(context, order=True):
             # If so, add the module to the model_list.
             if True in perms.values():
                 info = (app_label, model._meta.model_name)
+                try:
+                    modelicon = model.getIcon()
+                except:
+                    try:
+                        modelicon = apps.get_app_config(app_label).default_modles_icon
+                    except:
+                        modelicon= 'default.png'
                 model_dict = {
                     'name': capfirst(model._meta.verbose_name_plural),
                     'object_name': model._meta.object_name,
                     'perms': perms,
-                    'model_name': model._meta.model_name
+                    'model_name': model._meta.model_name,
+                    'icon':modelicon or 'default.png'
                 }
                 if perms.get('change', False):
                     try:
@@ -99,8 +107,13 @@ def get_app_list(context, order=True):
                         name = apps.get_app_config(app_label).verbose_name
                     except NameError:
                         name = app_label.title()
+                    try:
+                        appicon=apps.get_app_config(app_label).appicon
+                    except:
+                        appicon='default.svg'
                     app_dict[app_label] = {
                         'name': name,
+                        'appicon':appicon,
                         'app_label': app_label,
                         'app_url': reverse(
                             'admin:app_list',

@@ -23,6 +23,7 @@ class Migration(migrations.Migration):
                 ('settings', models.TextField(verbose_name='settings', blank=True, default='')),
                 ('children', models.TextField(verbose_name='children', blank=True, default='')),
                 ('collapsed', models.BooleanField(verbose_name='collapsed', default=False)),
+                ('grid',models.CharField(default='full', max_length=255, verbose_name='Grid')),
             ],
             options={
                 'verbose_name': 'user dashboard module',

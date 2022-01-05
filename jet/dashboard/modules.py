@@ -55,6 +55,7 @@ class DashboardModule(object):
     child_name_plural = None
     settings = None
     column = None
+    grid= 'full'
     order = None
 
     #: A boolean field which specify if widget should be rendered on dashboard page load or fetched
@@ -72,12 +73,14 @@ class DashboardModule(object):
         js = ()
 
     def __init__(self, title=None, model=None, context=None, **kwargs):
+
         if title is not None:
             self.title = title
         self.model = model
         self.context = context or {}
 
         for key in kwargs:
+
             if hasattr(self.__class__, key):
                 setattr(self, key, kwargs[key])
 
@@ -408,6 +411,7 @@ class ModelList(DashboardModule):
             app['models'] = list(app['models'])
 
             models.extend(app['models'])
+
 
         self.children = models
 
